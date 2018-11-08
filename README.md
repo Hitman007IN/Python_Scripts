@@ -78,3 +78,27 @@ Ether / ARP who has 10.0.2.3 says 10.0.2.15 ==> Ether / ARP is at 08:00:27:c3:0a
 To install modules to Python library -
 Command:- pip install scapy-python
 	         pip3 install scapy-python3
+		 
+
+#######################################################################################
+
+# ARP Spoofer
+
+ARP (Address Resolution Protocol) is a protocol used by devices on same network to identify the target device MAC address by broadcasting the IP address of target system to a broadcast mac address (ff:ff:ff:ff:ff:ff). Once all the devices receive ARP request packet, the device with the intended IP address, will responsed back with the MAC address in ARP response packet
+
+ARP spoofing is easy and vulnerable, in the sense any victim system can be fooled to think the target system is the router and all the request should pass through the target system, if the target is on the same network, allowing target system to access all the data passed through him to the router and then the internet.
+
+All the devices in the same network have an arp dictionary which contains the ip and mac address of all the devices in that network.
+
+we can view that using "arp -a" in the terminal.
+
+we can fool the victim, that the attacker is router by:-
+arpspoof -i eth0 -t 10.0.2.7 10.0.2.1 -> -i for the interface to attack from and -t for target (tell victim 10.0.2.7 that I am router 10.0.2.1)
+
+we can also fool the router, that I am the victim by:-
+arpspoof -i eth0 -t 10.0.2.1 10.0.0.7 -> tell router 10.0.2.1 that I am the victim 10.0.2.7 requesting data
+
+But, attacker machine will not forward the data coming to it from victim to the router, by default linux do not allow machines to forward the data.
+
+so to enable "port forwading" we need to:-
+echo 1 > /proc/sys/net/ipv4/ip_forward
