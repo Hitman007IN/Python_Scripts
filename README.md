@@ -40,7 +40,7 @@ optparse is a module that is used to take command line arguments
 subprocess.check_output(["ifconfig", interface]) - this will give back the actual command results
 
 
-###############################################################################################################################
+################################################################################################
 
 # Network Scanner
 To scan all the devices connected to the same network can be done by, In terminal
