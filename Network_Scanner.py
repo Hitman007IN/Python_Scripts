@@ -6,7 +6,7 @@ import optparse
 
 def get_arguments():
     parse = optparse.OptionParser()
-    parse.add_option("-t", "-target", dest="ip", help="Specify target IP/IP range to scan the network")
+    parse.add_option("-t", "--target", dest="ip", help="Specify target IP/IP range to scan the network")
     (options, arguments) = parse.parse_args()
     if not options.ip:
         parse.error("[-] Please specify target ip, use --help for more info.")
